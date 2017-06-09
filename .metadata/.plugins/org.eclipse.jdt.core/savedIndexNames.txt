@@ -1,0 +1,2 @@
+INDEX VERSION 1.130+/home/student/JavaBootCampProjects/.metadata/.plugins/org.eclipse.jdt.core
+865175399.index

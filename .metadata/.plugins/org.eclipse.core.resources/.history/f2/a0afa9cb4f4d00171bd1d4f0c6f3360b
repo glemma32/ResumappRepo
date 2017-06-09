@@ -1,0 +1,171 @@
+
+		import java.sql.Connection;
+		import java.sql.DriverManager;
+		import java.sql.ResultSet;
+		import java.sql.PreparedStatement;
+		import java.sql.Statement;
+		import java.sql.SQLException;
+		import java.util.Scanner;
+
+public class RoboResumeapp {
+
+	public static void main(String[] args) {
+		
+		
+				Connection con = null;
+				PreparedStatement pstmt = null;
+				Statement stmt =null;
+				ResultSet rs=null;ResultSet rs2= null;
+				ResultSet rs3=null;ResultSet rs4 = null;
+				String userInput= "";
+							try{
+					Class.forName("com.mysql.jdbc.Driver");
+		            con = DriverManager.getConnection("jdbc:mysql://localhost/ResumeDB?"
+		                               + "user=root&password=password");
+		            //Inserting data to PersonalInformation table.
+		            
+		            System.out.println("Enter the First name, last name and email address:");
+		            Scanner fsc = new Scanner(System.in);
+		            String fn = fsc.nextLine();
+		            Scanner Lsc = new Scanner(System.in);
+		            String ln = Lsc.nextLine();
+		            Scanner Esc = new Scanner(System.in);
+		            String Em = Esc.nextLine();
+		            String x = "Insert into PersonalInformation(FirstName, LastName,EmailAddress) values (?,?,?)";
+					pstmt = con.prepareStatement("Insert into PersonalInformation(FirstName, LastName,EmailAddress) values (?,?,?)");
+							pstmt.setString(1, fn);
+							pstmt.setString(2, ln);
+							pstmt.setString(3, Em);
+							pstmt.executeUpdate();
+							/*}catch (SQLException e) {
+								e.printStackTrace();
+							}catch (ClassNotFoundException e) {
+								e.printStackTrace();
+						} finally {
+							try {	
+								pstmt.close();
+								con.close();
+							}catch(SQLException e){
+								e.printStackTrace();
+							}
+							
+					// Inserting data to Education table.
+							try{
+								Class.forName("com.mysql.jdbc.Driver");
+					            con = DriverManager.getConnection("jdbc:mysql://localhost/ResumeDB?"
+					                               + "user=root&password=password");*/
+					do{
+						
+					System.out.println("Enter your educational background :");
+				    Scanner dsc = new Scanner(System.in);
+				    String dg = dsc.nextLine();
+				    Scanner msc = new Scanner(System.in);
+				    String mj = msc.nextLine();
+				    Scanner usc = new Scanner(System.in);
+				    String un = usc.nextLine();
+				    Scanner ysc = new Scanner(System.in);
+				    String yg = ysc.nextLine();
+				    String s = "Insert into Education(Degree, Major, UniversityGraduated, YearGraduated) values (?,?,?,?)";
+				    pstmt = con.prepareStatement("Insert into Education(Degree, Major, UniversityGraduated, YearGraduated) values (?,?,?,?)");
+							pstmt.setString(1, dg);
+							pstmt.setString(2, mj);
+							pstmt.setString(3, un);	
+							pstmt.setString(4, yg);	
+					System.out.println("Do you want to add more, Yes/No ?");
+					Scanner Input = new Scanner(System.in);
+					userInput = Input.nextLine();
+					}while(userInput.equalsIgnoreCase("yes"));
+					pstmt.executeUpdate();
+							/*}catch (SQLException e) {
+								e.printStackTrace();
+							}catch (ClassNotFoundException e) {
+								e.printStackTrace();
+						} finally {
+							try {	
+								pstmt.close();
+								con.close();
+							}catch(SQLException e){
+								e.printStackTrace();
+							}
+						}*/
+					// Inserting data to Experience table.
+					/*try{
+						Class.forName("com.mysql.jdbc.Driver");
+			            con = DriverManager.getConnection("jdbc:mysql://localhost/ResumeDB?"
+			                               + "user=root&password=password");*/
+					do{
+						System.out.println("Enter your professional experiences :");
+					    Scanner tsc = new Scanner(System.in);
+					    String tt = tsc.nextLine();
+					    Scanner csc = new Scanner(System.in);
+					    String cp = csc.nextLine();
+					    Scanner ssc = new Scanner(System.in);
+					    String sd = ssc.nextLine();
+					    Scanner esc = new Scanner(System.in);
+					    String ed = esc.nextLine();
+					    Scanner dsc = new Scanner(System.in);
+					    String dt = dsc.nextLine();
+					    String s = "Insert into Experience(Title, CompanyName, StartDate, EndDate, Duty) values (?,?,?,?,?)";
+					    pstmt = con.prepareStatement("Insert into Experience(Title, CompanyName, StartDate, EndDate, Duty) values (?,?,?,?,?)");
+								pstmt.setString(1, tt);
+								pstmt.setString(2, cp);
+								pstmt.setString(3, sd);	
+								pstmt.setString(3, ed);
+								pstmt.setString(4, dt);
+								pstmt.executeUpdate();
+						System.out.println("Do you want to add more, Yes/No ?");
+						Scanner Input = new Scanner(System.in);
+						userInput = Input.nextLine();
+						}while(userInput.equalsIgnoreCase("yes"));
+					/*}catch (SQLException e) {
+						e.printStackTrace();
+					}catch (ClassNotFoundException e) {
+						e.printStackTrace();
+				} finally {
+					try {	
+						pstmt.close();
+						con.close();
+					}catch(SQLException e){
+						e.printStackTrace();
+					}
+				}*/
+					
+					//Inserting data to Skills table.
+					/*try{
+						Class.forName("com.mysql.jdbc.Driver");
+			            con = DriverManager.getConnection("jdbc:mysql://localhost/ResumeDB?"
+			                               + "user=root&password=password");*/
+					
+					do{
+						System.out.println("Enter your field of expertise :");
+					    Scanner ssc = new Scanner(System.in);
+					    String sf = ssc.nextLine();
+					    System.out.println("How do you rate yourself? highly skilled, proficient or familiar ");
+					    Scanner rsc = new Scanner(System.in);
+					    String rt = rsc.nextLine();
+					    String s = "Insert into Skills(SkilledFields, Rating) values (?,?)";
+					    pstmt = con.prepareStatement(s);
+								pstmt.setString(1, sf);
+								pstmt.setString(2, rt);
+								pstmt.executeUpdate();
+						System.out.println("Do you want to add more, Yes/No ?");
+						Scanner Input = new Scanner(System.in);
+						userInput = Input.nextLine();
+						}while(userInput.equalsIgnoreCase("yes"));
+		
+					}catch (SQLException e) {
+						e.printStackTrace();
+					}catch (ClassNotFoundException e) {
+						e.printStackTrace();
+				} finally {
+					try {	
+						pstmt.close();
+						con.close();
+					}catch(SQLException e){
+						e.printStackTrace();
+					}
+
+				}
+			}
+	}
+		

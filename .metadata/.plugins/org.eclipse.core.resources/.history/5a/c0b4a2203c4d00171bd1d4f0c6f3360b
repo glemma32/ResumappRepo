@@ -1,0 +1,72 @@
+
+		import java.sql.Connection;
+		import java.sql.DriverManager;
+		import java.sql.PreparedStatement;
+		import java.sql.SQLException;
+		import java.util.Scanner;
+
+public class RoboResumeapp {
+
+	public static void main(String[] args) {
+		
+		
+				Connection con = null;
+				PreparedStatement pstmt = null;
+				String userInput= "";
+							try{
+					Class.forName("com.mysql.jdbc.Driver");
+		            con = DriverManager.getConnection("jdbc:mysql://localhost/ResumeDB?"
+		                               + "user=root&password=password");
+		            //Inserting data to PersonalInformation table
+		            System.out.println("Enter the First name, last name and email address:");
+		            Scanner fsc = new Scanner(System.in);
+		            String fn = fsc.nextLine();
+		            Scanner Lsc = new Scanner(System.in);
+		            String ln = Lsc.nextLine();
+		            Scanner Esc = new Scanner(System.in);
+		            String Em = Esc.nextLine();
+		            String x = "Insert into PersonalInformation(FirstName, LastName,EmailAddress) values (?,?,?)";
+					pstmt = con.prepareStatement("Insert into PersonalInformation(FirstName, LastName,EmailAddress) values (?,?,?)");
+							pstmt.setString(1, fn);
+							pstmt.setString(2, ln);
+							pstmt.setString(3, Em);
+							
+					// Inserting data to Education table.
+					do{
+					System.out.println("Enter your educational background :");
+				    Scanner dsc = new Scanner(System.in);
+				    String dg = dsc.nextLine();
+				    Scanner msc = new Scanner(System.in);
+				    String mj = msc.nextLine();
+				    Scanner usc = new Scanner(System.in);
+				    String un = usc.nextLine();
+				    Scanner ysc = new Scanner(System.in);
+				    String yg = ysc.nextLine();
+				    String s = "Insert into Education(Degree, Major, UniversityGraduated, YearGraduated) values (?,?,?,?)";
+				    pstmt = con.prepareStatement("Insert into Education(Degree, Major, UniversityGraduated, YearGraduated) values (?,?,?,?)");
+							pstmt.setString(1, dg);
+							pstmt.setString(2, mj);
+							pstmt.setString(3, un);	
+							pstmt.setString(3, yg);	
+					System.out.println("Do you want to add more, Yes/No ?");
+					Scanner input = new Scanner(System.in);
+					userInput = input.nextLine();
+					}while(userInput.equalsIgnoreCase("yes"));
+					
+					pstmt.executeUpdate();
+					
+				}catch (SQLException e) {
+						e.printStackTrace();
+					}catch (ClassNotFoundException e) {
+						e.printStackTrace();
+				} finally {
+					try {	
+						pstmt.close();
+						con.close();
+					}catch(SQLException e){
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		

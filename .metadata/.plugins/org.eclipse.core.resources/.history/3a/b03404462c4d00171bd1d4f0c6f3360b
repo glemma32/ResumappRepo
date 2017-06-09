@@ -1,0 +1,46 @@
+
+		import java.sql.Connection;
+		import java.sql.DriverManager;
+		import java.sql.PreparedStatement;
+		import java.sql.SQLException;
+		import java.util.Scanner;
+
+public class RoboResumeapp {
+
+	public static void main(String[] args) {
+		
+		
+				Connection con = null;
+				PreparedStatement pstmt = null;
+				try{
+					Class.forName("com.mysql.jdbc.Driver");
+		            con = DriverManager.getConnection("jdbc:mysql://localhost/ResumeDB?"
+		                               + "user=root&password=password");
+		            System.out.println("Enter the First name, last name and email address:");
+		            Scanner fsc = new Scanner(System.in);
+		            String fn = fsc.nextLine();
+		            Scanner Lsc = new Scanner(System.in);
+		            String ln = Lsc.nextLine();
+		            Scanner Esc = new Scanner(System.in);
+		            String Em = Esc.nextLine();
+		            String x = "Insert into PersonalInformation(FirstName, LastName,EmailAddress) values (?,?,?)";
+					pstmt = con.prepareStatement("Insert into PersonalInformation(FirstName, LastName,EmailAddress) values (?,?,?)");
+							pstmt.setString(1, fn);
+							pstmt.setString(2, ln);
+							pstmt.setString(3, Em);
+					pstmt.executeUpdate(x);
+				}catch (SQLException e) {
+						e.printStackTrace();
+					}catch (ClassNotFoundException e) {
+						e.printStackTrace();
+				} finally {
+					try {	
+						pstmt.close();
+						con.close();
+					}catch(SQLException e){
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		
